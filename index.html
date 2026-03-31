@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>UFO GOD: OVERDRIVE</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div id="game-wrap">
+      <div id="title-screen">
+        <div class="title-content">
+          <h1 class="glitch-title" data-text="UFO GOD">UFO GOD</h1>
+          <p class="subtitle">OVERDRIVE PROTOCOL</p>
+          <div class="mission-info">
+            <p>COMMAND: [MOUSE/TOUCH] MOVE / [CLICK/TAP] FIRE</p>
+            <p>SPECIAL: [X / SPACE] GRAVITY NOVA</p>
+          </div>
+          <button id="start-btn">INITIALIZE MISSION</button>
+        </div>
+      </div>
+
+      <div id="ui-layer">
+        <div class="hud-top">
+          <div class="stat-box"><span class="label">SCORE</span><span id="score" class="value neon-blue">00000</span></div>
+          <div class="stat-box"><span class="label">WAVE</span><span id="level" class="value neon-purple">01</span></div>
+        </div>
+        <div class="hud-bottom">
+          <div class="shield-container"><div class="shield-bar"><div id="shield-fill"></div></div></div>
+          <button id="special-btn">READY [TAP / SPACE]</button>
+        </div>
+      </div>
+      <canvas id="gameCanvas"></canvas>
+      <div id="crt-effect"></div>
+    </div>
+    <script type="module" src="./src/core/game-core.js"></script>
+</body>
+</html>
