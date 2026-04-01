@@ -8,7 +8,8 @@ import assert from 'node:assert/strict';
 import { FormValidator } from '../src/utils/validation.js';
 import { XssSanitizer } from '../src/utils/xss.js';
 
-test('FormValidator.validateScore validates integer range 0-9999999', () => {
+// スコア入力が許可された整数範囲内に収まるかを確認する。
+test('スコア入力が 0 から 9999999 の整数範囲に収まること', () => {
   assert.equal(FormValidator.validateScore(0), true);
   assert.equal(FormValidator.validateScore(9999999), true);
   assert.equal(FormValidator.validateScore(-1), false);
@@ -16,7 +17,8 @@ test('FormValidator.validateScore validates integer range 0-9999999', () => {
   assert.equal(FormValidator.validateScore('abc'), false);
 });
 
-test('XssSanitizer.escapeHtml escapes dangerous HTML characters', () => {
+// HTML特殊文字を無害化してタグとして解釈されないことを確認する。
+test('危険な HTML 文字列がエスケープされて無害化されること', () => {
   const raw = `<img src=x onerror="alert('xss')">`;
   const escaped = XssSanitizer.escapeHtml(raw);
 
