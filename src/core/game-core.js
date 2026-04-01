@@ -25,6 +25,12 @@ import { GAME_CONFIG, INPUT_KEYS } from "../utils/constants.js";
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: Canvas、各Manager、開始状態、UI参照をまとめて準備する
+ * - 進行制御: 自機更新、敵出現、当たり判定、描画を1フレーム単位で束ねる
+ * - 出力処理: スコア、シールド、特殊ゲージを含むゲーム状態を画面へ反映する
+ */
 export class Game {
   constructor() {
     this.canvas = document.getElementById("gameCanvas");

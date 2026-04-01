@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 入力値: 自機、敵、弾、アイテム、バリア状態など現在フレームの状態
+ * - 判定処理: 弾と敵、自機と敵弾、自機とアイテムの衝突を順番に評価する
+ * - 出力処理: HP、スコア、演出フラグ、配列要素の削除結果を反映する
+ */
 export class CollisionManager {
   constructor(game) { this.game = game; }
 

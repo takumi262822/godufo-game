@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: 敵テンプレート配列と現在ウェーブ番号を保持する
+ * - 更新処理: ウェーブ生成、敵移動、射撃、撃破状態の管理を担当する
+ * - 出力処理: 描画や当たり判定で使う敵配列を他クラスへ渡す
+ */
 export class EnemyManager {
   constructor(enemyTypes) {
     this.enemyTypes = enemyTypes || [];

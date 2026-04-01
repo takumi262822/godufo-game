@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: footer 要素と表示テキスト要素を生成する
+ * - 更新処理: setText でコピーライトや補足文言を差し替える
+ * - 出力処理: 生成したフッター要素を指定ルートへ配置できるようにする
+ */
 export class Footer {
   constructor(root = document.body, text = "") {
     this.root = root;

@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: 基本となる DOM 要素を生成し、クラス名を付与する
+ * - 更新処理: 文字列、HTML、属性、子要素など UI 構築操作を提供する
+ * - 出力処理: 再利用可能な共通 UI 部品として要素を返す
+ */
 export class BaseComponent {
   constructor(elementType = "div", className = "") {
     this.el = document.createElement(elementType);

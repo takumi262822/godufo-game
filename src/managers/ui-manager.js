@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 入力値: スコア、ウェーブ、シールド値、特殊ゲージ、ゲーム終了状態
+ * - 更新処理: DOM のテキスト、ゲージ幅、色、ボタン状態をまとめて更新する
+ * - 出力処理: プレイヤー向け HUD 表示へ最新状態を反映する
+ */
 export class UIManager {
   constructor(scoreEl, levelEl, shieldFill, specialBtn) {
     this.scoreEl = scoreEl;

@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: ボタン、マウス、タッチ、キーボードのイベントを登録する
+ * - 入力変換: 画面座標を Canvas 座標へ変換し、自機移動へ結び付ける
+ * - 出力処理: Game 本体へ操作結果を渡して状態更新を発火する
+ */
 export class InputManager {
   constructor(game) { this.game = game; }
 

@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: 自機の座標、サイズ、追従先座標を設定する
+ * - 更新処理: targetX に向かって滑らかに移動し、入力結果を反映する
+ * - 出力処理: 描画と当たり判定で利用する位置情報を提供する
+ */
 export class Player {
   constructor(x = 300, y = 650) {
     this.x = x;

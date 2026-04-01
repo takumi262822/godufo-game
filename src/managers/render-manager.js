@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 入力値: Game が保持する Canvas、Context、敵、自機、弾、演出状態
+ * - 描画処理: 背景、自機、敵、弾、揺れ演出をフレーム単位で合成する
+ * - 出力処理: 現在状態を Canvas に描き出してゲーム画面を更新する
+ */
 export class RenderManager {
   constructor(game) { this.game = game; }
   drawScene() {

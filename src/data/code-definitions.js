@@ -1,5 +1,10 @@
 import { ENEMY_TYPES } from "./enemy-data.js";
 
+/**
+ * 定数概要:
+ * - CODE_DEFINITIONS は敵タイプ一覧など横断参照するコード定義を束ねる
+ * - EnemyCode は敵名から対応する敵テンプレートを取得する参照ヘルパー
+ */
 export const CODE_DEFINITIONS = {
   ENEMY_TYPES,
 };

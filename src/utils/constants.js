@@ -2,6 +2,12 @@
  * @author Takumi Harada
  * @date 2026-03-31
  */
+/**
+ * 定数概要:
+ * - GAME_CONFIG は描画サイズ、初期耐久、特殊ゲージ上限などゲーム全体設定をまとめる
+ * - INPUT_KEYS は特殊攻撃に割り当てる入力キーを定義する
+ * - UI_TEXT はタイトルやコピーライトなど固定表示文言を管理する
+ */
 export const GAME_CONFIG = {
   CANVAS_WIDTH: 600,
   CANVAS_HEIGHT: 750,

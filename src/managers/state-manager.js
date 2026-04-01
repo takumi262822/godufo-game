@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 状態監視: 敵残数やゲームオーバー条件を確認して進行段階を判断する
+ * - 更新処理: ウェーブ上昇、レベル進行、クリア演出の状態切替を行う
+ * - 出力処理: 次ウェーブ生成や終了表示に必要な状態を他Managerへ伝える
+ */
 export class StateManager {
   constructor(game) {
     this.game = game;

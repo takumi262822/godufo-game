@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 判定処理: 特殊ゲージ量、開始状態、ゲームオーバー状態を確認する
+ * - 更新処理: 発動時にゲージ消費、敵一掃、演出値更新を行う
+ * - 出力処理: 特殊攻撃後のスコアと視覚効果をゲーム本体へ反映する
+ */
 export class SpecialManager {
   constructor(game) {
     this.game = game;

@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: header 要素とタイトル要素を生成し、ルート要素を保持する
+ * - 更新処理: setTitle で画面タイトルやゲーム名の表示を切り替える
+ * - 出力処理: 共通ヘッダー要素を画面上部へ追加できる状態にする
+ */
 export class Header {
   constructor(root = document.body, title = "") {
     this.root = root;

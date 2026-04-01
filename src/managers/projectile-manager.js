@@ -13,6 +13,12 @@
  * @author Takumi Harada
  * @date 2026-04-01
  */
+/**
+ * 処理概要:
+ * - 初期化処理: 自機弾、敵弾、ドロップアイテム配列を管理対象として持つ
+ * - 更新処理: 発射、追尾、移動、画面外除去を弾種ごとに実行する
+ * - 出力処理: 描画と衝突判定で使う最新の弾データを維持する
+ */
 export class ProjectileManager {
   constructor() { this.bullets = []; this.enemyBullets = []; this.items = []; }
   spawnPlayerFire(p, pwr, burst, homing) {
