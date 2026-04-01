@@ -3,6 +3,16 @@
  * @author Takumi Harada
  * @date 2026-03-31
  */
+/**
+ * ProjectileManager クラス
+ * 目的: 機能領域ごとの処理を管理する
+ * 入力: ゲーム状態・イベント・対象オブジェクト
+ * 処理: 責務領域の更新・判定・連携を行う
+ * 出力: 領域ごとの処理結果
+ * 補足: 単一責務を維持し必要最小限で連携する
+ * @author Takumi Harada
+ * @date 2026-04-01
+ */
 export class ProjectileManager {
   constructor() { this.bullets = []; this.enemyBullets = []; this.items = []; }
   spawnPlayerFire(p, pwr, burst, homing) {
