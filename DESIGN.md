@@ -63,9 +63,31 @@
 | barrierHealth | number | バリア耐久値 |
 
 ### 3.2 定数定義
-- GAME_CONFIG: Canvas サイズ、移動速度、ゲージなどの基本設定
-- INPUT_KEYS: 必殺技トリガーキー一覧
-- ENEMY_TYPES: 敵ごとの体力、速度、サイズ、形状、発射頻度
+
+#### GAME_CONFIG (src/utils/constants.js)
+| 定数 | 値 | 用途 |
+|---|---|---|
+| CANVAS_WIDTH | 600 | Canvas 横幅 (px) |
+| CANVAS_HEIGHT | 750 | Canvas 縦幅 (px) |
+| START_SHIELD | 100 | 初期シールド値 |
+| MAX_POWER_LEVEL | 5 | 最大火力レベル |
+| SPECIAL_ENERGY_MAX | 100 | 必殺技ゲージ満タン値 |
+
+- INPUT_KEYS.SPECIAL: `["KeyX", "Space"]`
+- UI_TEXT.TITLE: `"UFO GOD: OVERDRIVE"`
+- UI_TEXT.COPYRIGHT: `"© 2026 UFO GOD CORP."`
+
+#### ENEMY_TYPES (src/data/enemy-data.js)
+| 名前 | shape | hue | hp | speedMult | agility | shootRate | score | size (w×h) |
+|---|---|---|---|---|---|---|---|---|
+| STINGER | TRIANGLE | 190 | 1 | 1.6 | 0.05 | 0.004 | 150 | 25×25 |
+| OCTA-CORE | OCTAGON | 280 | 2 | 1.0 | 0.02 | 0.007 | 300 | 30×30 |
+| CRUISER | HEXAGON | 0 | 5 | 0.7 | 0.01 | 0.012 | 600 | 45×25 |
+| VOID-EYE | DIAMOND | 120 | 1 | 1.3 | 0.04 | 0.005 | 200 | 20×35 |
+
+#### ボス生成条件
+- `wave % 3 === 0` のとき通常敵を生成せずボス 1 体を生成する。
+- ボスは `isBoss: true`、`hp: wave * 4`、`score: 1000 * wave` で生成される。
 
 ## 4. 詳細設計
 
@@ -333,6 +355,35 @@
 - 実行環境: Chrome / Edge 最新版、ローカルサーバー経由
 - 品質ゲート: npm run lint、npm test、GitHub Actions CI
 - 制約: localStorage やバックエンド連携は持たない単体プレイ構成
+
+## 7. DOM セレクター一覧
+
+### 7.1 Game コンストラクターが取得する DOM
+| id | 役割 |
+|---|---|
+| `gameCanvas` | 描画用 Canvas 要素（width=600, height=750） |
+| `score` | 現在スコアのテキスト表示要素 |
+| `level` | 現在ウェーブのテキスト表示要素 |
+| `shield-fill` | シールドゲージのバー要素 |
+| `special-btn` | 必殺技ボタン（ゲージ満タン時のみ表示） |
+
+### 7.2 InputManager が登録するイベント要素
+| id / セレクター | イベント | 処理 |
+|---|---|---|
+| `start-btn` | `click` | タイトルを閉じてプレイ状態へ移行 |
+| `special-btn` | `click` | `triggerSpecial()` を呼び出す |
+| `window` | `mousemove` | 自機追従と isCharging を更新 |
+| `window` | `mousedown` | チャージ開始 |
+| `window` | `mouseup` | `fire()` を呼び出す |
+| `window` | `touchstart / touchmove / touchend` | タッチ操作をマウス操作へ変換 |
+| `window` | `keydown` | `INPUT_KEYS.SPECIAL` で `triggerSpecial()` |
+
+### 7.3 UFO スタイル閾値
+| スコア | 色 | 拡大率 | リング数 |
+|---|---|---|---|
+| 0 〜 2999 | `#0ff` | 1.0 | 1 |
+| 3000 〜 9999 | `#fff` | 1.2 | 2 |
+| 10000 以上 | `#f0f` | 1.4 | 4 |
 
 ## 6. 入力検証 / セキュリティ実装詳細
 
