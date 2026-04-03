@@ -65,6 +65,7 @@ export class CollisionManager {
           if (e.hp <= 0) {
             e.alive = false;
             g.score += e.isBoss ? 3000 : (e.score || 150);
+            if (e.isBoss) g.shake = 60;
             g.specialEnergy = Math.min(100, g.specialEnergy + 8);
             if (Math.random() < 0.3) g.projectileManager.spawnItem(e.x + e.w/2, e.y + e.h/2);
           }
