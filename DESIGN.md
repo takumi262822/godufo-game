@@ -282,10 +282,11 @@
   3. 自機弾と敵の矩形判定を行う。
   4. 撃破時はスコア加算、必殺技ゲージ回復、アイテム抽選を行う。
 - 分岐:
-  - a. barrierHealth が残っている場合: シールドではなくバリアを消費する。
+  - a. barrierHealth が残っている場合: シールドではなくバリアを消費し、shake = 5 を設定する。
+  - a-else. バリアがない場合: シールドを 20 消費し、shake = 45 を設定する。
   - b. アイテム種別が heal/power/homing/barrier のどれかで効果を分ける。
   - c. bullet が pierce false の場合: 命中後に弾を削除する。
-  - d. 敵 HP が 0 以下になった場合: alive を false にし撃破報酬を反映する。
+  - d. 敵 HP が 0 以下になった場合: alive を false にし撃破報酬を反映する。isBoss が true の場合は shake = 60 を設定する。
 
 ### 4.7 StateManager クラス
 
