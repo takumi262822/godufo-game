@@ -76,3 +76,10 @@ canvas {
                 linear-gradient(90deg, rgba(255, 0, 0, 0.02), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.02));
     background-size: 100% 3px, 3px 100%; pointer-events: none; z-index: 200;
 }
+
+/* --- フッター --- */
+.game-footer {
+    position: fixed; bottom: 8px; width: 100%; text-align: center;
+    font-size: 0.55em; color: rgba(0, 255, 255, 0.25); letter-spacing: 4px;
+    pointer-events: none; z-index: 201;
+}
