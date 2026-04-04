@@ -11,25 +11,10 @@ import { ENEMY_TYPES } from "../data/enemy-data.js";
 import { GAME_CONFIG, INPUT_KEYS } from "../utils/constants.js";
 
 /**
- * Game �N���X
+
+ * ゲーム全体の進行を束ねるメインクラス。
+ * Canvas・各Managerを初期化し、毎フレームの更新・描画ループを制御する。
  * @author Takumi Harada
- * @date 2026-03-31
- */
-/**
- * Game クラス
- * 目的: アプリ/ゲームの進行制御を担当する
- * 入力: 初期データ・現在状態・ユーザー操作
- * 処理: 初期化・分岐・状態更新を実行する
- * 出力: 進行更新された画面状態
- * 補足: 各下位クラスの責務を束ねる
- * @author Takumi Harada
- * @date 2026-04-01
- */
-/**
- * 処理概要:
- * - 初期化処理: Canvas、各Manager、開始状態、UI参照をまとめて準備する
- * - 進行制御: 自機更新、敵出現、当たり判定、描画を1フレーム単位で束ねる
- * - 出力処理: スコア、シールド、特殊ゲージを含むゲーム状態を画面へ反映する
  */
 export class Game {
   constructor() {

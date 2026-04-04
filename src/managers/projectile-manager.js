@@ -1,23 +1,6 @@
 /**
- * ProjectileManager クラス
+ * 自機弾・敵弾・ドロップアイテムの生成・移動・消去を一元管理するクラス。追尾弾ロジックも含む。
  * @author Takumi Harada
- * @date 2026-03-31
- */
-/**
- * ProjectileManager クラス
- * 目的: 機能領域ごとの処理を管理する
- * 入力: ゲーム状態・イベント・対象オブジェクト
- * 処理: 責務領域の更新・判定・連携を行う
- * 出力: 領域ごとの処理結果
- * 補足: 単一責務を維持し必要最小限で連携する
- * @author Takumi Harada
- * @date 2026-04-01
- */
-/**
- * 処理概要:
- * - 初期化処理: 自機弾、敵弾、ドロップアイテム配列を管理対象として持つ
- * - 更新処理: 発射、追尾、移動、画面外除去を弾種ごとに実行する
- * - 出力処理: 描画と衝突判定で使う最新の弾データを維持する
  */
 export class ProjectileManager {
   constructor() { this.bullets = []; this.enemyBullets = []; this.items = []; }

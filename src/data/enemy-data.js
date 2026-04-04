@@ -1,7 +1,6 @@
 /**
- * 敵ユニット�EバリエーションチE�Eタ�E��E期設定値を厳守！E
+ * 敵ユニットのバリエーションデータ（初期設定値）。
  * @author Takumi Harada
- * @date 2026-03-31
  */
 /**
  * 定数概要:
@@ -9,14 +8,7 @@
  * - ENEMY_TYPES はウェーブ生成時に再利用する敵テンプレート配列
  */
 /**
- * EnemyType クラス
- * 目的: このクラスの責務を実行する
- * 入力: 状態値・設定値・ユーザー操作
- * 処理: 責務に沿って判定/更新/制御を行う
- * 出力: 更新済みの状態または表示結果
- * 補足: 詳細は SCREEN-OVERVIEW.md のクラス設計を参照
- * @author Takumi Harada
- * @date 2026-04-01
+ * 敵ユニット1種の定義値を保持し、指定座標に初期状態オブジェクトを生成する基底クラス。
  */
 class EnemyType {
     constructor({ name, shape, hue, hp, speedMult, agility, shootRate, score, size }) {
@@ -47,64 +39,28 @@ class EnemyType {
 }
 
 // 吁E��ラスのサイズ(size: {w, h})を�Eの設定に完�E復帰
-/**
- * Stinger クラス
- * 目的: このクラスの責務を実行する
- * 入力: 状態値・設定値・ユーザー操作
- * 処理: 責務に沿って判定/更新/制御を行う
- * 出力: 更新済みの状態または表示結果
- * 補足: 詳細は SCREEN-OVERVIEW.md のクラス設計を参照
- * @author Takumi Harada
- * @date 2026-04-01
- */
+/** 高速・HP1の三角形型敵。すばやい動きと低射撃頻度が特徴。スコア150点。 */
 class Stinger extends EnemyType {
     constructor() {
         super({ name: "STINGER", shape: "TRIANGLE", hue: 190, hp: 1, speedMult: 1.6, agility: 0.05, shootRate: 0.004, score: 150, size: { w: 25, h: 25 } });
     }
 }
 
-/**
- * OctaCore クラス
- * 目的: このクラスの責務を実行する
- * 入力: 状態値・設定値・ユーザー操作
- * 処理: 責務に沿って判定/更新/制御を行う
- * 出力: 更新済みの状態または表示結果
- * 補足: 詳細は SCREEN-OVERVIEW.md のクラス設計を参照
- * @author Takumi Harada
- * @date 2026-04-01
- */
+/** 標準速・HP2の八角形型敵。射撃頻度が高く中盤以降に登場する。スコア300点。 */
 class OctaCore extends EnemyType {
     constructor() {
         super({ name: "OCTA-CORE", shape: "OCTAGON", hue: 280, hp: 2, speedMult: 1.0, agility: 0.02, shootRate: 0.007, score: 300, size: { w: 30, h: 30 } });
     }
 }
 
-/**
- * Cruiser クラス
- * 目的: このクラスの責務を実行する
- * 入力: 状態値・設定値・ユーザー操作
- * 処理: 責務に沿って判定/更新/制御を行う
- * 出力: 更新済みの状態または表示結果
- * 補足: 詳細は SCREEN-OVERVIEW.md のクラス設計を参照
- * @author Takumi Harada
- * @date 2026-04-01
- */
+/** 低速・HP5の六角形型敵。射撃頻度最大の重装型。スコア600点。 */
 class Cruiser extends EnemyType {
     constructor() {
         super({ name: "CRUISER", shape: "HEXAGON", hue: 0, hp: 5, speedMult: 0.7, agility: 0.01, shootRate: 0.012, score: 600, size: { w: 45, h: 25 } });
     }
 }
 
-/**
- * VoidEye クラス
- * 目的: このクラスの責務を実行する
- * 入力: 状態値・設定値・ユーザー操作
- * 処理: 責務に沿って判定/更新/制御を行う
- * 出力: 更新済みの状態または表示結果
- * 補足: 詳細は SCREEN-OVERVIEW.md のクラス設計を参照
- * @author Takumi Harada
- * @date 2026-04-01
- */
+/** 高機動・HP1のひし形型敵。ランダムな動きが予測しにくい。スコア200点。 */
 class VoidEye extends EnemyType {
     constructor() {
         super({ name: "VOID-EYE", shape: "DIAMOND", hue: 120, hp: 1, speedMult: 1.3, agility: 0.04, shootRate: 0.005, score: 200, size: { w: 20, h: 35 } });

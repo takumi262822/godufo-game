@@ -1,23 +1,6 @@
 /**
- * RenderManager クラス
+ * Canvas へのゲーム画面描画を担うクラス。背景・自機・敵・弾・シェイク演出を毎フレーム合成する。
  * @author Takumi Harada
- * @date 2026-03-31
- */
-/**
- * RenderManager クラス
- * 目的: 機能領域ごとの処理を管理する
- * 入力: ゲーム状態・イベント・対象オブジェクト
- * 処理: 責務領域の更新・判定・連携を行う
- * 出力: 領域ごとの処理結果
- * 補足: 単一責務を維持し必要最小限で連携する
- * @author Takumi Harada
- * @date 2026-04-01
- */
-/**
- * 処理概要:
- * - 入力値: Game が保持する Canvas、Context、敵、自機、弾、演出状態
- * - 描画処理: 背景、自機、敵、弾、揺れ演出をフレーム単位で合成する
- * - 出力処理: 現在状態を Canvas に描き出してゲーム画面を更新する
  */
 export class RenderManager {
   constructor(game) { this.game = game; }
