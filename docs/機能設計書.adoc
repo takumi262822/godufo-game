@@ -1,0 +1,161 @@
+= 機能設計書
+:project: UFO GOD: OVERDRIVE
+:author: Takumi Harada
+:revdate: 2026-04-05
+:doctype: article
+:toc:
+:toc-title: 目次
+:sectnums:
+
+== 概要
+
+本書はプロジェクト「{project}」の主要クラス・メソッド・分岐ロジックを記述した技術設計書です。
+
+---
+
+== モジュール構成
+
+[cols="2,4", options="header"]
+|===
+|ファイルパス
+|担当責務
+
+|src/core/game-core.js
+|ゲームループ制御・全マネージャー統括
+
+|src/core/game-player.js
+|プレイヤー座標管理・移動処理
+
+|src/managers/enemy-manager.js
+|敵ウェーブ生成・位置更新
+
+|src/managers/projectile-manager.js
+|プレイヤー弾・敵弾の生成と移動
+
+|src/managers/collision-manager.js
+|弾と敵・弾とプレイヤーの衝突判定
+
+|src/managers/ui-manager.js
+|スコア・シールド・特殊ゲージの DOM 更新
+
+|src/managers/special-manager.js
+|特殊攻撃の発動と演出
+
+|src/managers/render-manager.js
+|全オブジェクトの Canvas 描画
+
+|src/managers/state-manager.js
+|ウェーブ進行・パワーアップ判定
+
+|src/managers/input-manager.js
+|キーボード・タッチイベントの受付
+
+|src/data/enemy-data.js
+|敵テンプレート定義
+
+|src/data/code-definitions.js
+|コード定義の集約・検索ヘルパー
+
+|src/utils/constants.js
+|ゲーム設定・入力キー・表示文言の定数
+
+|===
+
+---
+
+== クラス設計
+
+=== Game（game-core.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|constructor()
+|public
+|Canvas 要素取得、各マネージャーのインスタンス化、InputManager 初期化
+
+|gameLoop()
+|public
+|update() → draw() → requestAnimationFrame によるループ再帰
+
+|update()
+|public
+|フレームカウント増加、プレイヤー更新、敵弾生成、弾更新、衝突解決、レベル更新、UI 更新。ゲームオーバー条件を検知した場合は isGameOver = true に設定
+
+|draw()
+|public
+|RenderManager.drawScene() に委譲して全描画を実行
+
+|fire()
+|public
+|ProjectileManager.spawnPlayerFire() を呼び出す。isStarted かつ !isGameOver の場合のみ実行
+
+|triggerSpecial()
+|public
+|SpecialManager.triggerSpecial() を呼び出す。isStarted かつ !isGameOver の場合のみ実行
+
+|getUfoStyle()
+|public
+|スコアに応じた色・ズーム・光輪数を返す。score >= 10000 → GOD モード、score >= 3000 → OVERDRIVE、それ未満 → 通常
+
+|===
+
+=== EnemyManager（enemy-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|constructor(types)
+|public
+|ENEMY_TYPES を受け取り enemies/bullets 配列を初期化
+
+|update(frame, timeScale, width)
+|public
+|フレーム数を元にウェーブタイミングを判定し spawnWave() を呼び出す。全敵の座標更新と弾生成を実行し、生成した弾配列を返す
+
+|spawnWave(wave, width)
+|private
+|ENEMY_TYPES からランダム選択した敵を canvas.width 内に配置
+
+|===
+
+=== CollisionManager（collision-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|resolve()
+|public
+|プレイヤー弾 × 敵、敵弾 × プレイヤーの AABB 判定を実行。ヒット時に HP 減算・score 加算・shake 付与を行う。ボス撃破時は shake に 60 を設定
+
+|===
+
+---
+
+== ゲーム進行フロー
+
+[source]
+----
+1. ページ読み込み → new Game().gameLoop()
+2. スタートボタン押下 → isStarted = true
+3. gameLoop() 実行
+   a. update(): 敵生成・弾移動・衝突判定・レベル進行
+   b. draw(): Canvas 全体の再描画
+4. シールドが 0 以下 → isGameOver = true → ゲームオーバー画面
+----
+
+---
+
+== セキュリティ考慮事項
+
+* XSS: スコアなど動的値は textContent 経由で DOM に反映（innerHTML は不使用）
+* 入力検証: InputManager はイベントコードの許可リストのみ受け付ける
