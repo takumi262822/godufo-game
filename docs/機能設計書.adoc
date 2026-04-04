@@ -139,6 +139,128 @@
 
 |===
 
+=== Player（game-player.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|constructor()
+|public
+|自機の初期座標・サイズ・追従先座標を初期化する
+
+|update()
+|public
+|targetX に向かって線形補間で移動し、急激な操作変化を滑らかに反映する
+
+|moveTo(x)
+|public
+|入力座標を targetX として保持する
+
+|getHitbox()
+|public
+|当たり判定用の矩形（x, y, w, h）を返す
+
+|===
+
+=== InputManager（input-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|init()
+|public
+|start-btn / special-btn / mouse / touch / keyboard の各イベントを登録し、game.player.moveTo()・game.fire()・game.triggerSpecial() へ接続する
+
+|===
+
+=== ProjectileManager（projectile-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|constructor()
+|public
+|bullets（自機弾）・enemyBullets（敵弾）・items（ドロップ）を空配列で初期化する
+
+|spawnPlayerFire(player, powerLevel, burst, homing)
+|public
+|溜め撃ち（burst=true）か通常弾かで弾サイズ・色を切り替え、powerLevel 分だけ横にずらした弾を bullets に追加する
+
+|updateBullets(canvas, enemies)
+|public
+|自機弾の位置更新・ホーミング補正・画面外削除を行い、敵弾とアイテムを下方向へ移動する
+
+|spawnItem(x, y)
+|public
+|heal / power / homing / barrier のいずれかを抽選してドロップアイテムを生成する
+
+|===
+
+=== StateManager（state-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|updateLevel(enemies, shield, isGameOver)
+|public
+|敵が全滅していれば wave を加算して EnemyManager.spawnWave() を呼ぶ。shield が 0 以下なら isGameOver を true に設定する
+
+|===
+
+=== UIManager（ui-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|update(score, wave, shield, specialEnergy)
+|public
+|SCORE・WAVE・SHIELD バー・SPECIAL ゲージの DOM を更新する。SHIELD が 0 以下なら true を返す
+
+|===
+
+=== SpecialManager（special-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|triggerSpecial(game)
+|public
+|specialEnergy が MAX 以上の場合に全敵・全弾を消去し、スコアを一括加算する。発動後は specialEnergy を 0 にリセットする
+
+|===
+
+=== RenderManager（render-manager.js）
+
+[cols="2,1,4", options="header"]
+|===
+|メソッド
+|可視性
+|処理内容
+
+|drawScene(ctx, game)
+|public
+|背景・自機・敵・弾・演出エフェクト・HUD を順に描画する。shake が残っている場合は Canvas 全体をオフセットして揺れ演出を実現する
+
+|===
+
 ---
 
 == ゲーム進行フロー
