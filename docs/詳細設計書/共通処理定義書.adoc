@@ -1,0 +1,117 @@
+= 共通処理定義書
+:author: Takumi Harada
+:revdate: 2026-04-04
+:toc:
+:lang: ja
+
+== 概要
+
+本書は GODUFO ゲームで全クラス・モジュールから横断的に利用する共通処理を定義する。 +
+DOM 反映前は必ず XssSanitizer を経由し、入力値は FormValidator で検証してから利用する。
+
+---
+
+== 1. XSS サニタイズ処理
+
+ファイル: `src/utils/xss.js` +
+クラス: `XssSanitizer`
+
+[cols="2,2,4", options="header"]
+|===
+|メソッド名|引数 → 戻り値|処理内容
+
+|`escapeHtml(value)`
+|value: any → string
+|null / undefined を空文字に変換後、`& < > " '` を HTML エンティティに置換する
+
+|`sanitizeTextInput(value)`
+|value: any → string
+|escapeHtml への委譲メソッド。テキスト入力を DOM に反映する前に呼ぶ
+|===
+
+.変換対応表
+[cols="1,1"]
+|===
+|入力文字|変換後
+|`&`|`&amp;`
+|`<`|`&lt;`
+|`>`|`&gt;`
+|`"`|`&quot;`
+|`'`|`&#39;`
+|===
+
+NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで export されている。
+
+---
+
+== 2. バリデーション処理
+
+ファイル: `src/utils/validation.js` +
+クラス: `FormValidator`
+
+[cols="2,2,4", options="header"]
+|===
+|メソッド名|引数 → 戻り値|処理内容
+
+|`isRequired(value)`
+|value: any → boolean
+|null・undefined・空文字のいずれかなら false
+
+|`isInt(value)`
+|value: any → boolean
+|Number 変換後に `Number.isInteger` でチェック
+
+|`inRange(value, min, max)`
+|value: any, min: number, max: number → boolean
+|NaN 除外後に `min <= n <= max` を確認
+
+|`validateScore(score)`
+|score: any → boolean
+|`isInt(score) && inRange(score, 0, 9999999)` の複合チェック
+|===
+
+---
+
+== 3. ヘッダー UI 処理
+
+ファイル: `src/ui/header.js` +
+クラス: `Header`
+
+[cols="2,2,4", options="header"]
+|===
+|メソッド名|引数 → 戻り値|処理内容
+
+|`constructor(root, title)`
+|root: Element, title: string → -
+|`<header class="game-header">` と `<h1>` を生成して内部保持する
+
+|`setTitle(title)`
+|title: string → this
+|h1 テキストと `this.title` を更新してメソッドチェーンを返す
+
+|`attach()`
+|- → this
+|`root.prepend` で DOM 先頭に挿入してメソッドチェーンを返す
+|===
+
+---
+
+== 4. フッター UI 処理
+
+ファイル: `src/ui/footer.js` +
+クラス: `Footer`
+
+[cols="2,2,4", options="header"]
+|===
+|メソッド名|引数 → 戻り値|処理内容
+
+|`constructor(root)`
+|root: Element → -
+|`<footer>` 要素にコピーライト文字列を設定して内部保持する
+
+|`attach()`
+|- → this
+|`root.append` で DOM 末尾に挿入してメソッドチェーンを返す
+|===
+
+コピーライト表記: `© 2026 UFOGOD. All Rights Reserved.`

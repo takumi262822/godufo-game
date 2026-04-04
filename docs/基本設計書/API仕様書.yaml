@@ -1,0 +1,63 @@
+openapi: 3.0.3
+info:
+  title: GODUFO ゲームデータ仕様
+  description: |-
+    GODUFO はブラウザ上で動作するシューティングゲームです。
+    外部 REST API は持たず、データは全てセッション中のメモリで管理されます。
+    localStorage への永続化は行わないため、ページリロードでリセットされます。
+  version: 1.0.0
+  contact:
+    name: Takumi Harada
+
+servers: []
+
+paths: {}
+
+components:
+  schemas:
+
+    GameState:
+      type: object
+      description: ゲーム実行中にメモリ上で保持するゲーム状態
+      properties:
+        wave:
+          type: integer
+          description: 現在のウェーブ番号
+          example: 3
+        shield:
+          type: integer
+          description: プレイヤーの残シールド値 (0でゲームオーバー)
+          minimum: 0
+          maximum: 100
+        score:
+          type: integer
+          description: 現在のスコア
+          minimum: 0
+          maximum: 9999999
+        isGameOver:
+          type: boolean
+          description: ゲームオーバーフラグ
+        timeScale:
+          type: number
+          description: ゲームスピード倍率 (通常 1.0、ウェーブクリア時 0.2 からリカバリ)
+
+    EnemyData:
+      type: object
+      description: 敵キャラクターの定義データ (src/data/enemy-data.js で静的定義)
+      properties:
+        id:
+          type: string
+          description: 敵種別 ID
+        hp:
+          type: integer
+          description: 初期 HP
+        speed:
+          type: number
+          description: 移動速度
+        score:
+          type: integer
+          description: 撃破時の獲得スコア
+
+x-notes:
+  persistence: "localStorageは使用しない。全データはゲームセッション中のメモリで管理。"
+  storage-keys: "なし"
