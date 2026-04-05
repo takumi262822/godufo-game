@@ -20,6 +20,7 @@
 
 ^.^|{counter:変更履歴} |1.00 |Takumi Harada |2026/3/31 ^.^|- |新規作成
 ^.^|{counter:変更履歴} |1.01 |Takumi Harada |2026/4/5 <.^|全体 <.^|ファイル名変更・書式統一（格納先・説明・変更履歴）
+^.^|{counter:変更履歴} |1.02 |Takumi Harada |2026/4/5 <.^|全体 <.^|引数と戻り値を入力項目・出力項目の表に分割
 |===
 
 == 概要
@@ -43,12 +44,20 @@ DOM への文字列反映前に HTML 特殊文字をエスケープし、XSS 攻
 
 ==== escapeHtml(value)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `value` |any |任意の値。`null` / `undefined` は空文字に変換してから処理する。
-<.^|戻り値 |string |`& < > " '` を HTML エンティティに置換した文字列
+<.^|`value` |any |任意の値。`null` / `undefined` は空文字に変換してから処理する。
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|string |`& < > " '` を HTML エンティティに置換した文字列
 |===
 
 .変換表
@@ -70,12 +79,20 @@ NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで e
 
 `escapeHtml` への委譲メソッド。テキスト入力を DOM に反映する直前に呼ぶ。
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `value` |any |任意の値。`null` / `undefined` の場合は空文字を返す。
-<.^|戻り値 |string |エスケープ済み文字列（`escapeHtml` の結果と同一）
+<.^|`value` |any |任意の値。`null` / `undefined` の場合は空文字を返す。
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|string |エスケープ済み文字列（`escapeHtml` の結果と同一）
 |===
 
 ---
@@ -94,50 +111,82 @@ NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで e
 
 ==== isRequired(value)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `value` |any |検査対象の値
-<.^|戻り値 |boolean |`null`・`undefined`・空文字のいずれかなら `false`
+<.^|`value` |any |検査対象の値
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|boolean |`null`・`undefined`・空文字のいずれかなら `false`
 |===
 
 ---
 
 ==== isInt(value)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `value` |any |検査対象の値
-<.^|戻り値 |boolean |`Number` 変換後に `Number.isInteger` で確認した結果
+<.^|`value` |any |検査対象の値
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|boolean |`Number` 変換後に `Number.isInteger` で確認した結果
 |===
 
 ---
 
 ==== inRange(value, min, max)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `value` |any |検査対象の値
-<.^|引数 `min` |number |下限値（含む）
-<.^|引数 `max` |number |上限値（含む）
-<.^|戻り値 |boolean |NaN 除外後に `min <= n <= max` を確認した結果
+<.^|`value` |any |検査対象の値
+<.^|`min` |number |下限値（含む）
+<.^|`max` |number |上限値（含む）
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|boolean |NaN 除外後に `min <= n <= max` を確認した結果
 |===
 
 ---
 
 ==== validateScore(score)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `score` |any |検査対象のスコア値
-<.^|戻り値 |boolean |`isInt(score) && inRange(score, 0, 9999999)` の複合チェック結果
+<.^|`score` |any |検査対象のスコア値
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|boolean |`isInt(score) && inRange(score, 0, 9999999)` の複合チェック結果
 |===
 
 ---
@@ -156,25 +205,38 @@ NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで e
 
 ==== constructor(root, title)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `root` |Element |ヘッダーを挿入する親要素
-<.^|引数 `title` |string |ヘッダーに表示するゲームタイトル
-<.^|戻り値 |- |`<header class="game-header">` と `<h1>` を生成して内部保持する
+<.^|`root` |Element |ヘッダーを挿入する親要素
+<.^|`title` |string |ヘッダーに表示するゲームタイトル
 |===
+
+.出力項目
+なし
+
+NOTE: `<header class="game-header">` と `<h1>` を生成して内部保持する。
 
 ---
 
 ==== setTitle(title)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `title` |string |更新後のタイトル文字列
-<.^|戻り値 |this |h1 テキストと `this.title` を更新してメソッドチェーンを返す
+<.^|`title` |string |更新後のタイトル文字列
+|===
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|this |h1 テキストと `this.title` を更新してメソッドチェーンを返す
 |===
 
 ---
@@ -185,8 +247,15 @@ NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで e
 |===
 ^.^|項目 ^.^|型 <.^|内容
 
-<.^|引数 |- |-
-<.^|戻り値 |this |`root.prepend` で DOM 先頭に挿入してメソッドチェーンを返す
+.入力項目
+なし
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|this |`root.prepend` で DOM 先頭に挿入してメソッドチェーンを返す
 |===
 
 ---
@@ -205,13 +274,18 @@ NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで e
 
 ==== constructor(root)
 
+.入力項目
 [cols="2,2,4", options="header"]
 |===
-^.^|項目 ^.^|型 <.^|内容
+^.^|引数 ^.^|型 <.^|内容
 
-<.^|引数 `root` |Element |フッターを挿入する親要素
-<.^|戻り値 |- |`<footer>` 要素にコピーライト文字列を設定して内部保持する
+<.^|`root` |Element |フッターを挿入する親要素
 |===
+
+.出力項目
+なし
+
+NOTE: `<footer>` 要素にコピーライト文字列を設定して内部保持する。
 
 ---
 
@@ -221,8 +295,15 @@ NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで e
 |===
 ^.^|項目 ^.^|型 <.^|内容
 
-<.^|引数 |- |-
-<.^|戻り値 |this |`root.append` で DOM 末尾に挿入してメソッドチェーンを返す
+.入力項目
+なし
+
+.出力項目
+[cols="2,4", options="header"]
+|===
+^.^|型 <.^|内容
+
+|this |`root.append` で DOM 末尾に挿入してメソッドチェーンを返す
 |===
 
 NOTE: コピーライト表記: `© 2026 UFOGOD. All Rights Reserved.`
