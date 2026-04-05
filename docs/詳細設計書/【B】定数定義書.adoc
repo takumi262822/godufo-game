@@ -28,12 +28,12 @@
 |===
 ^.^|No. ^.^|定数名（論理名） ^.^|定数名（物理名） ^.^|型 ^.^|設定値 ^.^|備考
 
-^.^|{counter:定数} <.^|キャンバス幅 <.^|GAME_CONFIG.CANVAS_WIDTH <.^|number <.^|600 <.^|Canvas の描画幅 (px)
-^.^|{counter:定数} <.^|キャンバス高さ <.^|GAME_CONFIG.CANVAS_HEIGHT <.^|number <.^|750 <.^|Canvas の描画高さ (px)
-^.^|{counter:定数} <.^|初期シールド値 <.^|GAME_CONFIG.START_SHIELD <.^|number <.^|100 <.^|ゲーム開始時のシールド初期値
-^.^|{counter:定数} <.^|最大パワーレベル <.^|GAME_CONFIG.MAX_POWER_LEVEL <.^|number <.^|5 <.^|プレイヤーの最大パワーレベル
-^.^|{counter:定数} <.^|特殊攻撃エネルギー上限 <.^|GAME_CONFIG.SPECIAL_ENERGY_MAX <.^|number <.^|100 <.^|特殊攻撃メーターの上限値
-^.^|{counter:定数} <.^|特殊攻撃トリガーキー <.^|INPUT_KEYS.SPECIAL <.^|string[] <.^|["KeyX", "Space"] <.^|特殊攻撃トリガーキーコード一覧。KeyboardEvent.code と照合する
-^.^|{counter:定数} <.^|ゲームタイトルテキスト <.^|UI_TEXT.TITLE <.^|string <.^|"宇宙大戦" <.^|ゲームタイトル表示文字列
-^.^|{counter:定数} <.^|著作権表記テキスト <.^|UI_TEXT.COPYRIGHT <.^|string <.^|"© 2026 UFO GOD CORP." <.^|著作権表記文字列
+^.^|{counter:定数} <.^|キャンバス幅 <.^|GAME_CONFIG.CANVAS_WIDTH <.^|数値型 <.^|600 <.^|Canvas の描画幅 (px)
+^.^|{counter:定数} <.^|キャンバス高さ <.^|GAME_CONFIG.CANVAS_HEIGHT <.^|数値型 <.^|750 <.^|Canvas の描画高さ (px)
+^.^|{counter:定数} <.^|初期シールド値 <.^|GAME_CONFIG.START_SHIELD <.^|数値型 <.^|100 <.^|ゲーム開始時のシールド初期値
+^.^|{counter:定数} <.^|最大パワーレベル <.^|GAME_CONFIG.MAX_POWER_LEVEL <.^|数値型 <.^|5 <.^|プレイヤーの最大パワーレベル
+^.^|{counter:定数} <.^|特殊攻撃エネルギー上限 <.^|GAME_CONFIG.SPECIAL_ENERGY_MAX <.^|数値型 <.^|100 <.^|特殊攻撃メーターの上限値
+^.^|{counter:定数} <.^|特殊攻撃トリガーキー <.^|INPUT_KEYS.SPECIAL <.^|文字型[] <.^|["KeyX", "Space"] <.^|特殊攻撃トリガーキーコード一覧。KeyboardEvent.code と照合する
+^.^|{counter:定数} <.^|ゲームタイトルテキスト <.^|UI_TEXT.TITLE <.^|文字型 <.^|"宇宙大戦" <.^|ゲームタイトル表示文字列
+^.^|{counter:定数} <.^|著作権表記テキスト <.^|UI_TEXT.COPYRIGHT <.^|文字型 <.^|"© 2026 UFO GOD CORP." <.^|著作権表記文字列
 |===
