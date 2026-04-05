@@ -14,12 +14,11 @@
 :table-caption: 表
 :figure-caption: 図
 
-[#変更履歴, title="変更履歴", cols="1,2,3,3,3,3", options="header", align="center"]
+[#変更履歴, title="変更履歴", cols="1,2,3,3,3,3,3", options="header", align="center"]
 |===
-^.^|No. ^.^|版数 ^.^|変更者 <.^|作成日/変更日 <.^|変更箇所 <.^|変更内容
+^.^|No. ^.^|版数 ^.^|変更者 <.^|作成日/変更日 <.^|仕変番号/障害番号 <.^|変更箇所 <.^|変更内容
 
-^.^|{counter:変更履歴} |1.00 |Takumi Harada |2026/3/31 <.^|- |新規作成
-^.^|{counter:変更履歴} |1.01 |Takumi Harada |2026/4/4 <.^|全体 <.^|全体
+^.^|{counter:変更履歴} |1.00 |Takumi Harada |2026-04-04 ^.^|- ^.^|- |新規作成
 |===
 
 == 定数一覧
