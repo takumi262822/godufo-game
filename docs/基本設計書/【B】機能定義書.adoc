@@ -1,5 +1,5 @@
-= 機能設計書
-:project: UFO GOD: OVERDRIVE
+﻿= 機能設計書
+:project: 宇宙大戦
 :author: Takumi Harada
 :revdate: 2026-04-05
 :doctype: article

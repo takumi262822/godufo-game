@@ -21,6 +21,6 @@ export const INPUT_KEYS = {
 };
 
 export const UI_TEXT = {
-  TITLE: "UFO GOD: OVERDRIVE",
+  TITLE: "宇宙大戦",
   COPYRIGHT: "© 2026 UFO GOD CORP.",
 };
