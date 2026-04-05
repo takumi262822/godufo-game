@@ -1,0 +1,228 @@
+= 宇宙大戦: 共通処理定義書
+:lang: ja
+:doctype: book
+:toc: left
+:toclevels: 5
+:toc-title: 目次
+:sectnums:
+:sectnumlevels: 5
+:sectlinks:
+:imagesdir: ./images
+:icons: font
+:source-highlighter: coderay
+:example-caption: 例
+:table-caption: 表
+:figure-caption: 図
+
+[#変更履歴, title="変更履歴", cols="1,2,3,3,3,3", options="header", align="center"]
+|===
+^.^|No. ^.^|版数 ^.^|変更者 <.^|作成日/変更日 <.^|変更箇所 <.^|変更内容
+
+^.^|{counter:変更履歴} |1.00 |Takumi Harada |2026/3/31 ^.^|- |新規作成
+^.^|{counter:変更履歴} |1.01 |Takumi Harada |2026/4/5 <.^|全体 <.^|ファイル名変更・書式統一（格納先・説明・変更履歴）
+|===
+
+== 概要
+
+本書は宇宙大戦（GODUFO ゲーム）全体で使用する共通ユーティリティの仕様を記載します。 +
+DOM 反映前は必ず XssSanitizer を経由し、入力値は FormValidator で検証してから利用する。
+
+---
+
+== 1. XssSanitizer クラス
+
+=== 格納先
+
+`src/utils/xss.js`
+
+=== 説明
+
+DOM への文字列反映前に HTML 特殊文字をエスケープし、XSS 攻撃を防ぐ。
+
+=== 静的メソッド
+
+==== escapeHtml(value)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `value` |any |任意の値。`null` / `undefined` は空文字に変換してから処理する。
+<.^|戻り値 |string |`& < > " '` を HTML エンティティに置換した文字列
+|===
+
+.変換表
+[cols="1,1", options="header"]
+|===
+|入力文字|変換後
+|`&`|`&amp;`
+|`<`|`&lt;`
+|`>`|`&gt;`
+|`"`|`&quot;`
+|`'`|`&#39;`
+|===
+
+NOTE: `XSSSanitizer` は後方互換エイリアスとして同ファイルで export されている。
+
+---
+
+==== sanitizeTextInput(value)
+
+`escapeHtml` への委譲メソッド。テキスト入力を DOM に反映する直前に呼ぶ。
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `value` |any |任意の値。`null` / `undefined` の場合は空文字を返す。
+<.^|戻り値 |string |エスケープ済み文字列（`escapeHtml` の結果と同一）
+|===
+
+---
+
+== 2. FormValidator クラス
+
+=== 格納先
+
+`src/utils/validation.js`
+
+=== 説明
+
+ゲーム内の入力値（スコア・整数チェック）を検証する。
+
+=== 静的メソッド
+
+==== isRequired(value)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `value` |any |検査対象の値
+<.^|戻り値 |boolean |`null`・`undefined`・空文字のいずれかなら `false`
+|===
+
+---
+
+==== isInt(value)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `value` |any |検査対象の値
+<.^|戻り値 |boolean |`Number` 変換後に `Number.isInteger` で確認した結果
+|===
+
+---
+
+==== inRange(value, min, max)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `value` |any |検査対象の値
+<.^|引数 `min` |number |下限値（含む）
+<.^|引数 `max` |number |上限値（含む）
+<.^|戻り値 |boolean |NaN 除外後に `min <= n <= max` を確認した結果
+|===
+
+---
+
+==== validateScore(score)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `score` |any |検査対象のスコア値
+<.^|戻り値 |boolean |`isInt(score) && inRange(score, 0, 9999999)` の複合チェック結果
+|===
+
+---
+
+== 3. Header クラス
+
+=== 格納先
+
+`src/ui/header.js`
+
+=== 説明
+
+画面上部のヘッダー要素を生成し DOM へ追加する。
+
+=== メソッド
+
+==== constructor(root, title)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `root` |Element |ヘッダーを挿入する親要素
+<.^|引数 `title` |string |ヘッダーに表示するゲームタイトル
+<.^|戻り値 |- |`<header class="game-header">` と `<h1>` を生成して内部保持する
+|===
+
+---
+
+==== setTitle(title)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `title` |string |更新後のタイトル文字列
+<.^|戻り値 |this |h1 テキストと `this.title` を更新してメソッドチェーンを返す
+|===
+
+---
+
+==== attach()
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 |- |-
+<.^|戻り値 |this |`root.prepend` で DOM 先頭に挿入してメソッドチェーンを返す
+|===
+
+---
+
+== 4. Footer クラス
+
+=== 格納先
+
+`src/ui/footer.js`
+
+=== 説明
+
+画面下部のフッター要素を生成し DOM へ追加する。
+
+=== メソッド
+
+==== constructor(root)
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 `root` |Element |フッターを挿入する親要素
+<.^|戻り値 |- |`<footer>` 要素にコピーライト文字列を設定して内部保持する
+|===
+
+---
+
+==== attach()
+
+[cols="2,2,4", options="header"]
+|===
+^.^|項目 ^.^|型 <.^|内容
+
+<.^|引数 |- |-
+<.^|戻り値 |this |`root.append` で DOM 末尾に挿入してメソッドチェーンを返す
+|===
+
+NOTE: コピーライト表記: `© 2026 UFOGOD. All Rights Reserved.`
