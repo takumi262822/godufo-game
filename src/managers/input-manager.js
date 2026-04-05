@@ -1,5 +1,4 @@
 ﻿/**
- * マウス・タッチ・キーボード入力を受け取り、自機移動・発射・特殊攻撃に変換するクラス。
  * @author Takumi Harada
  * @date 2026/3/31
  */
@@ -8,17 +7,17 @@ export class InputManager {
 
   init() {
     const g = this.game;
-    const startBtn = document.getElementById("start-btn");
+    const startBtn   = document.getElementById("start-btn");
     const specialBtn = document.getElementById("special-btn");
 
-    // 座標計算（ズレ防止�E�E
+    // canvas の表示サイズと canvas.width が違うときにズレる問題を補正
     const getX = (e) => {
-      const r = g.canvas.getBoundingClientRect();
+      const r  = g.canvas.getBoundingClientRect();
       const cx = e.touches ? e.touches[0].clientX : e.clientX;
       return (cx - r.left) * (g.canvas.width / r.width);
     };
 
-    // ミッション開姁E
+    // タイトル画面を隠して最初のウェーブを生成
     if (startBtn) {
       startBtn.addEventListener("click", (e) => {
         e.preventDefault();
@@ -28,43 +27,46 @@ export class InputManager {
       });
     }
 
-    // 忁E��技ボタン�E�タチE�E・クリチE��両対応！E
+    // 必殺技ボタンはタッチとマウス両方に対応（モバイルは touchstart でないと遅延がある）
     if (specialBtn) {
       const trigger = (e) => {
-        e.preventDefault(); e.stopPropagation();
+        e.preventDefault();
+        e.stopPropagation();
         if (g.isStarted) g.triggerSpecial();
       };
       specialBtn.addEventListener("touchstart", trigger, { passive: false });
       specialBtn.addEventListener("mousedown", trigger);
     }
 
-    // 移動�Eチャージ・発封E�E統吁E
+    // 押した瞬間にチャージ開始 + 自機の targetX も更新
     const down = (e) => {
       if (!g.isStarted) return;
       g.isCharging = true;
       g.player.moveTo(getX(e));
     };
+
     const move = (e) => {
-      if (g.isStarted) {
-        g.player.moveTo(getX(e));
-        if (e.touches) e.preventDefault(); // スクロール防止
-      }
+      if (!g.isStarted) return;
+      g.player.moveTo(getX(e));
+      // touchmove はデフォルトでスクロールが走るので preventDefault で止める
+      if (e.touches) e.preventDefault();
     };
+
+    // 指/クリックを離したら発射（チャージ量によって弾種が変わる）
     const up = () => {
       if (g.isStarted) g.fire();
     };
 
-    // マウスイベンチE
     window.addEventListener("mousedown", down);
     window.addEventListener("mousemove", move);
-    window.addEventListener("mouseup", up);
+    window.addEventListener("mouseup",   up);
 
-    // タチE��イベント（スマ�E�E�E
+    // passive: false にしないと touchmove 内で preventDefault が効かない
     window.addEventListener("touchstart", (e) => { down(e); }, { passive: false });
-    window.addEventListener("touchmove", (e) => { move(e); }, { passive: false });
-    window.addEventListener("touchend", (e) => { up(e); }, { passive: false });
+    window.addEventListener("touchmove",  (e) => { move(e); }, { passive: false });
+    window.addEventListener("touchend",   (e) => { up(e);   }, { passive: false });
 
-    // キーボ�EチE
+    // キーボードはスペースか X で必殺技
     window.addEventListener("keydown", (e) => {
       if (g.KEYS.SPECIAL.includes(e.code)) g.triggerSpecial();
     });

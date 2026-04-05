@@ -1,6 +1,4 @@
 ﻿/**
- * ウェーブ進行・ゲームオーバー判定を担うクラス。
- * 全敵撃破でウェーブを更新し、シールド枯渇でゲームオーバーへ遷移する。
  * @author Takumi Harada
  * @date 2026/3/31
  */
@@ -12,26 +10,26 @@ export class StateManager {
   updateLevel() {
     const g = this.game;
 
-    // 修正ポイント：敵が「�E列に存在し」、かつ「�E員死んでぁE��」時のみ次へ進む
-    // これにより、E��始直後や生�E中の「敵ぁE匹」�E瞬間をクリアと誤認する�Eを防ぎまぁE
+    // 「敵が1体以上いる && 全員死亡」という二重チェックが重要
+    // length > 0 を省くと、ゲーム開始直後（enemies が空の瞬間）にも次ウェーブへ進んでしまう
     if (g.enemyManager.enemies.length > 0 && g.enemyManager.areAllDead()) {
       g.wave += 1;
       g.enemyManager.wave = g.wave;
       g.enemyManager.spawnWave();
-      
-      // ウェーブクリア時�Eスロー演�E�E�演�Eとして timeScale を下げる！E
+
+      // ウェーブクリア時だけ一瞬スローにして達成感を演出
       g.timeScale = 0.2;
     }
 
-    // スロー状態から徐、E��通常の速度(1.0)に復帰させめE
+    // スロー状態は毎フレーム +0.01 で自然に 1.0 へ戻る（0.8 秒ほどで復帰）
     if (g.timeScale < 1) {
       g.timeScale += 0.01;
     }
 
-    // ゲームオーバ�E判宁E
+    // シールドが 0 になった瞬間だけここを通す（二重発火防止で isGameOver フラグで制御）
     if (g.shield <= 0 && !g.isGameOver) {
       g.isGameOver = true;
-      // 2秒後にリロードしてリトライ�E�忁E��に応じてUI表示に変更してください�E�E
+      // 2秒待ってから location.reload でリスタート。setTimeout は意図的
       setTimeout(() => location.reload(), 2000);
     }
   }
