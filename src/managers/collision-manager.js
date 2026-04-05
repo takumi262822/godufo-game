@@ -1,7 +1,8 @@
-/**
+﻿/**
  * 弾・自機・アイテム間の衝突判定を担うクラス。
  * ヒット時のダメージ処理・アイテム効果適用・スコア加算を一括で行う。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class CollisionManager {
   constructor(game) { this.game = game; }

@@ -1,7 +1,8 @@
-/**
+﻿/**
  * 敵ウェーブの生成・移動・射撃を管理するクラス。
  * ウェーブ番号に応じて敵数・速度・射撃頻度を段階的に上昇させる。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class EnemyManager {
   constructor(enemyTypes) {

@@ -1,7 +1,8 @@
-/**
+﻿/**
  * 特殊攻撃の発動判定・ゲージ消費・全体ダメージ処理を担うクラス。
  * 発動時はスロー演出と画面シェイクを併用する。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class SpecialManager {
   constructor(game) {

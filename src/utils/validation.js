@@ -1,6 +1,7 @@
-/**
+﻿/**
  * スコア値の型・整数・範囲チェックを行うバリデーションヘルパークラス。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class FormValidator {
   static isRequired(value) {

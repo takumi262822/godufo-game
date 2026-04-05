@@ -1,6 +1,7 @@
-/**
+﻿/**
  * マウス・タッチ・キーボード入力を受け取り、自機移動・発射・特殊攻撃に変換するクラス。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class InputManager {
   constructor(game) { this.game = game; }

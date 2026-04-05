@@ -1,6 +1,7 @@
-/**
+﻿/**
  * ゲーム画面下部のフッター要素を生成し、コピーライト等の表示を管理する UI クラス。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class Footer {
   constructor(root = document.body, text = "") {

@@ -1,3 +1,8 @@
+﻿/**
+ * Game core logic class (main loop / state transition)
+ * @author Takumi Harada
+ * @date 2026/3/31
+ */
 import { Player } from "./game-player.js";
 import { EnemyManager } from "../managers/enemy-manager.js";
 import { ProjectileManager } from "../managers/projectile-manager.js";
@@ -9,6 +14,7 @@ import { RenderManager } from "../managers/render-manager.js";
 import { StateManager } from "../managers/state-manager.js";
 import { ENEMY_TYPES } from "../data/enemy-data.js";
 import { GAME_CONFIG, INPUT_KEYS } from "../utils/constants.js";
+import { Footer } from "../ui/footer.js";
 
 /**
 
@@ -68,3 +74,4 @@ export class Game {
   gameLoop() { this.update(); this.draw(); requestAnimationFrame(() => this.gameLoop()); }
 }
 new Game().gameLoop();
+new Footer().setYear();

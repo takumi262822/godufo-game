@@ -1,6 +1,7 @@
-/**
+﻿/**
  * スコア・ウェーブ・シールドバー・特殊ゲージなど HUD 要素を毎フレーム更新するクラス。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class UIManager {
   constructor(scoreEl, levelEl, shieldFill, specialBtn) {

@@ -1,6 +1,7 @@
-/**
+﻿/**
  * 自機（UFO）の座標・サイズを管理し、targetX へのスムーズな追従移動を行うクラス。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class Player {
   constructor(x = 300, y = 650) {

@@ -1,7 +1,8 @@
-/**
+﻿/**
  * ウェーブ進行・ゲームオーバー判定を担うクラス。
  * 全敵撃破でウェーブを更新し、シールド枯渇でゲームオーバーへ遷移する。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class StateManager {
   constructor(game) {

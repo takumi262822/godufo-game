@@ -1,6 +1,7 @@
-/**
+﻿/**
  * Canvas へのゲーム画面描画を担うクラス。背景・自機・敵・弾・シェイク演出を毎フレーム合成する。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class RenderManager {
   constructor(game) { this.game = game; }

@@ -1,6 +1,7 @@
-/**
+﻿/**
  * DOM 要素の生成・テキスト設定・イベント登録・親要素への追加を提供する、再利用可能な UI ベースクラス。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class BaseComponent {
   constructor(elementType = "div", className = "") {

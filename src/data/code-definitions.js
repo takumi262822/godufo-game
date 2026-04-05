@@ -1,3 +1,8 @@
+﻿/**
+ * Code and name mapping definitions
+ * @author Takumi Harada
+ * @date 2026/3/31
+ */
 import { ENEMY_TYPES } from "./enemy-data.js";
 
 /**

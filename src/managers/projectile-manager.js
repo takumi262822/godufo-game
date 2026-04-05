@@ -1,6 +1,7 @@
-/**
+﻿/**
  * 自機弾・敵弾・ドロップアイテムの生成・移動・消去を一元管理するクラス。追尾弾ロジックも含む。
  * @author Takumi Harada
+ * @date 2026/3/31
  */
 export class ProjectileManager {
   constructor() { this.bullets = []; this.enemyBullets = []; this.items = []; }

@@ -83,3 +83,22 @@ canvas {
     font-size: 0.55em; color: rgba(0, 255, 255, 0.25); letter-spacing: 4px;
     pointer-events: none; z-index: 201;
 }
+
+/* --- スマホ対応 (max-width: 600px) --- */
+@media (max-width: 600px) {
+    #gameCanvas {
+        width: 100vw !important;
+        height: 100vw !important;
+    }
+    .hud-top {
+        font-size: 0.75em;
+        gap: 8px;
+    }
+    #special-btn {
+        font-size: 0.7em;
+        padding: 6px 10px;
+    }
+    .title-content h1 {
+        font-size: 1.8em;
+    }
+}
