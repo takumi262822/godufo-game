@@ -40,12 +40,14 @@ export class InputManager {
 
     // 押した瞬間にチャージ開始 + 自機の targetX も更新
     const down = (e) => {
+      // ゲームの入力は引数で、ゲームの開始前は指/クリック操作を無視する
       if (!g.isStarted) return;
       g.isCharging = true;
       g.player.moveTo(getX(e));
     };
 
     const move = (e) => {
+      // ゲームの入力は引数で、ゲームの開始前は移動操作を無視する
       if (!g.isStarted) return;
       g.player.moveTo(getX(e));
       // touchmove はデフォルトでスクロールが走るので preventDefault で止める

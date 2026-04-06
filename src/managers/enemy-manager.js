@@ -41,8 +41,10 @@ export class EnemyManager {
     const enemyBullets = [];
 
     this.enemies.forEach((e) => {
+      // 既に死亡した敵は更新処理をスキップする
       if (!e.alive) return;
 
+      // ボスと通常敵で移動・射撃ロジックを分岐する
       if (e.isBoss) {
         // ボスは横移動だけ。端に当たると折り返す
         e.x += e.vX * timeScale;
@@ -84,6 +86,7 @@ export class EnemyManager {
 
   draw(ctx, frame) {
     this.enemies.forEach((e) => {
+      // 既に死亡した敵は描画をスキップする
       if (!e.alive) return;
       ctx.save();
       ctx.translate(e.x + e.w / 2, e.y + e.h / 2);
@@ -92,8 +95,8 @@ export class EnemyManager {
       ctx.strokeStyle = `hsl(${e.hue}, 100%, 70%)`;
       ctx.lineWidth = 2;
 
+      // ボスと通常敵で描画形状・ HP バーを分岐する
       if (e.isBoss) {
-        // 120度ずつ回転した矩形を3枚重ねる。frame でゆっくり自転
         ctx.rotate(frame * 0.02);
         for (let i = 0; i < 3; i++) {
           ctx.rotate(Math.PI / 1.5);

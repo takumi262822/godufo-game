@@ -80,6 +80,7 @@ export class Game {
 
   // 発射: 溜め状態をリセットして ProjectileManager に投げるだけ
   fire() {
+    // ゲームが開始前またはゲームオーバー後は発射を無視する
     if (!this.isStarted || this.isGameOver) return;
     this.projectileManager.spawnPlayerFire(
       this.player,
@@ -93,14 +94,14 @@ export class Game {
 
   // スコアに応じて自機の見た目を変える（色・ズーム・光輪数）
   // 閾値は 3000 と 10000。GOD モードになると派手さが一段上がる
-  getUfoStyle() {
-    if (this.score >= 10000) return { c: "#f0f", z: 1.4, k: 4 };
+  getUfoStyle() {    // スコアが10000以上なら GOD モード、3000以上ならオーバードライブ演出    if (this.score >= 10000) return { c: "#f0f", z: 1.4, k: 4 };
     if (this.score >= 3000)  return { c: "#fff", z: 1.2, k: 2 };
     return { c: "#0ff", z: 1.0, k: 1 };
   }
 
   // 毎フレーム処理。開始前・ゲームオーバー後はスキップする
   update() {
+    // ゲームが未開始またはゲームオーバー後は更新処理をスキップする
     if (!this.isStarted || this.isGameOver) return;
 
     this.frame++;
@@ -125,6 +126,7 @@ export class Game {
 
     // UIManager は更新と同時にゲームオーバー判定も兼ねている（シールド 0 で true を返す）
     if (this.uiManager.update(this.score, this.wave, this.shield, this.specialEnergy, this.isGameOver)) {
+      // UIManagerがシールドゼロを検知した場合にゲームオーバーフラグを立てる
       this.isGameOver = true;
     }
   }

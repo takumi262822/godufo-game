@@ -47,10 +47,13 @@ export class CollisionManager {
       const b = g.projectileManager.bullets[i];
       let hit = false;
       for (const e of g.enemyManager.enemies) {
+        // 斢に死亡した敵は当たり判定をスキップする
         if (!e.alive) continue;
+        // 自弾が敵のバウンディングボックス内に入った場合に命中判定する
         if (b.x > e.x && b.x < e.x + e.w && b.y > e.y && b.y < e.y + e.h) {
           e.hp -= 1;
           hit = true;
+          // 敵の HP がゼロ以下になった場合に撕殺処理のスコア加算・アイテムドロップを実行する
           if (e.hp <= 0) {
             e.alive = false;
             g.score += e.isBoss ? 3000 : (e.score || 150);
@@ -63,6 +66,7 @@ export class CollisionManager {
           if (!b.pierce) break;
         }
       }
+      // 命中したかつ貫通属性でない弾は配列から削除する
       if (hit && !b.pierce) g.projectileManager.bullets.splice(i, 1);
     }
   }

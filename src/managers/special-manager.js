@@ -18,8 +18,10 @@ export class SpecialManager {
     g.timeScale = 0.1;  // スロー演出（0.1 倍速）で「爆発した感」を出す
 
     g.enemyManager.enemies.forEach((e) => {
+      // 既に死亡した敵には必殺技のダメージを与えない
       if (!e.alive) return;
       e.hp -= 40; // 全画面の敵に一律 40 ダメージ
+      // HPが0以下になった場合に撕殺処理・スコア加算・エネルギー回収を実行する
       if (e.hp <= 0) {
         e.alive = false;
         g.score += e.isBoss ? 3000 : (e.score || 150);

@@ -28,6 +28,7 @@ export class ProjectileManager {
     for (let i = this.bullets.length - 1; i >= 0; i--) {
       const b = this.bullets[i];
 
+      // ホーミング弾かつ生きている敵がいる時は追尾計算を行う
       if (b.homing && enemies.length > 0) {
         const targets = enemies.filter(e => e.alive);
         if (targets.length > 0) {

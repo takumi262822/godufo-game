@@ -33,7 +33,7 @@ export class RenderManager {
     ctx.translate(g.player.x, g.player.y);
     ctx.scale(s.z, s.z); // ズームは失対瓰なので当たり判定範囲にも影響する点に注意
 
-    // バリアは健康値に比例した不透明度の円で表示
+    // バリアの健康値が残っている場合のみバリア円を描画する
     if (g.barrierHealth > 0) {
       ctx.beginPath();
       ctx.arc(0, 0, 42, 0, Math.PI * 2);
