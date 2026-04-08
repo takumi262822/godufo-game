@@ -141,5 +141,6 @@ export class Game {
   }
 }
 
-new Game().gameLoop();
+window.g = new Game();
+window.g.gameLoop();
 new Footer().setYear();

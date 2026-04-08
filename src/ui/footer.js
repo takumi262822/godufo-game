@@ -20,6 +20,12 @@ export class Footer {
     return this;
   }
 
+  setYear() {
+    const year = new Date().getFullYear();
+    this.textEl.textContent = `© ${year}`;
+    return this;
+  }
+
   attach() {
     this.root.appendChild(this.el);
     return this;
